@@ -4,12 +4,11 @@ from Logic.CRUD import adaugaCalculator, stergeCalculator, modificaCalculator
 
 def printMenu():
     print("MENIU")
-    print("1.Aduaga calculator ")
+    print("1.Adauga calculator ")
     print("2.Stergere calculator")
     print("3.Modificare calculator")
     print("a.Arata lista")
-    print("4.Mutarea tuturor calculatoarelor dintr-o locatie in alta")
-    print("5.Iesire")
+    print("4.Iesire")
 
 
 def uiAdaugaCalculator(lista):
@@ -52,7 +51,7 @@ def runMenu(lista):
             lista=uiModificaCalculator(lista)
         elif optiune=="a":
             uiShowLista(lista)
-        elif optiune=="5":
+        elif optiune=="4":
             break
         else:
             print("Optiune gresita!")

@@ -48,7 +48,7 @@ def modificaCalculator(id,nume,descriere,pret,locatie,lista):
     listaNoua=[]
     for calculator in lista:
         if getId(calculator)==id:
-            calculatorNoua=creeazaCalculator(id,nume,descriere,pret,locatie,lista)
+            calculatorNoua=creeazaCalculator(id,nume,descriere,pret,locatie)
             listaNoua.append(calculatorNoua)
         else:
             listaNoua.append(calculator)
