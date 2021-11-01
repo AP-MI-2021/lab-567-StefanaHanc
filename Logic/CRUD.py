@@ -3,7 +3,7 @@ from Domain.calculatoare import creeazaCalculator, getId, getLocatie
 
 def adaugaCalculator(id,nume,descriere,pret,locatie,lista):
     """
-    Adauga un ccalculator in lista
+    Adauga un calculator in lista
     :param id: string
     :param nume: string
     :param descriere: string

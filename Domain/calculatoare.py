@@ -15,6 +15,8 @@ def creeazaCalculator(id,nume,descriere,pret,locatie):
         "pret":pret,
         "locatie":locatie
     }
+
+
 def getId(calculator):
     """
     da id_ul unui telefon

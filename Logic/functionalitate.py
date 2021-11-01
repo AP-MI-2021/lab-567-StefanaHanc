@@ -2,6 +2,11 @@ from Domain.calculatoare import getLocatie, getPret, creeazaCalculator, getId, g
 
 
 def maxPretPerLocatie(lista):
+    """
+    Determinarea celui mai mare preț pentru fiecare locație.
+    :param lista: Lista verificata
+    :return:Lista cu cele mai mari preturi pentru locatii
+    """
     rezultat = {}
     for calculator in lista:
         locatie=getLocatie(calculator)
@@ -15,14 +20,23 @@ def maxPretPerLocatie(lista):
 
 
 def ordonareDupaPret(lista):
+    """
+     Ordonarea obiectelor crescător după prețul de achiziție.
+    :param lista: Lista are trebuie sortata
+    :return : Lista sortata
+    """
     return sorted(lista,key=lambda calculator:getPret(calculator))
 
 
-def getlocatie(calculator):
-    pass
-
 
 def modificaLocatia(adresaCautata,adresanoua,lista):
+    """
+     Mutarea tuturor obiectelor dintr-o locație în alta.
+    :param adresaCautata: string
+    :param adresanoua:string
+    :param lista:adresa verificata
+    :return:noua lista cu locatia modificata
+    """
     listaNoua=[]
     for calculator in lista:
         id =getId(calculator)
@@ -30,7 +44,7 @@ def modificaLocatia(adresaCautata,adresanoua,lista):
         descriere =getDescriere(calculator)
         pret = getPret(calculator)
         locatia = getLocatie(calculator)
-        if locatia is adresaCautata:
+        if locatia == adresaCautata:
           calculatorNoua = creeazaCalculator(id, nume, descriere, pret, adresanoua)
           listaNoua.append(calculatorNoua)
         else:

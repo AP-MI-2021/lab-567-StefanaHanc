@@ -27,16 +27,16 @@ def uiAdaugaCalculator(lista):
 
 
 def uiStergereCalculator(lista):
-    id=input("Dati id-ul stergerii de sters: ")
+    id=input("Dati id-ul de sters: ")
     return stergeCalculator(id,lista)
 
 
 def uiModificaCalculator(lista):
-    id = input("Dati id-ul nou:")
-    nume = input("Dati numele nou:")
-    descriere = input("Dati descrierea noua:")
+    id = input("Dati id-ul calculatorului pe are doriti sa il modificati: ")
+    nume = input("Dati numele nou: ")
+    descriere = input("Dati descrierea noua: ")
     pret = float(input("Dati pretul nou: "))
-    locatie = input("Dati locatia noua:")
+    locatie = input("Dati locatia noua: ")
     return modificaCalculator(id, nume, descriere, pret, locatie, lista)
 
 
@@ -65,10 +65,9 @@ def runMenu(lista):
         elif optiune=="a":
             uiShowLista(lista)
         elif optiune=="4":
-            adresaCautata=input("Dati adresa initiala a obiectelor")
-            adresaNoua=input("Dati noua adresa a obiectelor")
+            adresaCautata=input("Dati adresa initiala a obiectelor: ")
+            adresaNoua=input("Dati noua adresa a obiectelor: ")
             lista =modificaLocatia(adresaCautata, adresaNoua, lista)
-
         elif optiune=="5":
             uiMaxPretPerLocatie(lista)
         elif optiune=="6":
