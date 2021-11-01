@@ -1,4 +1,4 @@
-from Domain.calculatoare import creeazaCalculator, getId
+from Domain.calculatoare import creeazaCalculator, getId, getLocatie
 
 
 def adaugaCalculator(id,nume,descriere,pret,locatie,lista):
@@ -35,6 +35,8 @@ def stergeCalculator(id,lista):
     :return:
     """
     return [calculator for calculator in lista if getId(calculator)!=id]
+
+
 def modificaCalculator(id,nume,descriere,pret,locatie,lista):
     """
     Modifica un calculator dupa id

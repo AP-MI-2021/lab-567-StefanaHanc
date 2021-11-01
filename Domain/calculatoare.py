@@ -8,29 +8,35 @@ def creeazaCalculator(id,nume,descriere,pret,locatie):
     :param locatie: string
     :return:  un ditionar ce descriere un telefon
     """
-    return [id,nume,descriere,pret,locatie]
+    return {
+        "id":id,
+        "nume":nume,
+        "descriere":descriere,
+        "pret":pret,
+        "locatie":locatie
+    }
 def getId(calculator):
     """
     da id_ul unui telefon
     :param telefon: dictionar ce contine un telefon
     :return: id_ul telefonului
     """
-    return calculator[0]
+    return calculator["id"]
 
 def getNume(calculator):
-    return calculator[1]
+    return calculator["nume"]
 
 
 def getDescriere(calculator):
-    return calculator[2]
+    return calculator["descriere"]
 
 
 def getPret(calculator):
-    return calculator[3]
+    return calculator["pret"]
 
 
 def getLocatie(calculator):
-    return calculator[4]
+    return calculator["locatie"]
 
 def toString(calculator):
     return "Id:{}, Nume: {}, Descriere: {}, Pret: {}, Locatie:{}".format(
