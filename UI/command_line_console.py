@@ -52,6 +52,3 @@ def meniu():
             merge = False
         else:
             print("Comanda gresita! Incercati din nou!")
-
-
-meniu()

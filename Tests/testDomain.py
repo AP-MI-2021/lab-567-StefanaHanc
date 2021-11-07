@@ -2,7 +2,7 @@ from Domain.calculatoare import creeazaCalculator, getId, getNume, getDescriere,
 
 
 def testCalculator():
-    calculator=creeazaCalculator("1","Lenovo2","Windows 10",2400.23,"Cluj")
+    calculator=creeazaCalculator("1","Lenovo","Windows 10",2400.23,"Cluj")
     assert getId(calculator)=="1"
     assert getNume(calculator) == "Lenovo"
     assert getDescriere(calculator)=="Windows 10"
