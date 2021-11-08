@@ -17,6 +17,25 @@ def adaugaCalculator(id,nume,descriere,pret,locatie,lista):
     calculator=creeazaCalculator(id,nume,descriere,pret,locatie)
     return lista+[calculator]
 
+def adaugaCalculatorUndoRedo(id,nume,descriere,pret,locatie,lista,undoList,redoList):
+    """
+    Adauga un calculator in lista
+    :param id: string
+    :param nume: string
+    :param descriere: string
+    :param pret: float
+    :param locatie: string
+    :param lista:
+    :return: Retuneaza o lista continand elementele vechii cat si noua prajitura
+    """
+    if getById(id,lista) is not None:
+        raise ValueError("Id-ul exista deja!")
+    calculator=creeazaCalculator(id,nume,descriere,pret,locatie)
+    undoList.append(lista)
+    redoList.clear()
+    return lista+[calculator]
+
+
 def getById(id,lista):
     """
     DA calculatorul cu id-ul dat dintr-o lista

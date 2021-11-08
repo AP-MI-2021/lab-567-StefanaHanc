@@ -1,7 +1,7 @@
-from Tests.testCRUD import testAdaugaCalculator, testStergereCalculator, testUndo
+from Tests.testCRUD import testAdaugaCalculator, testStergereCalculator
 from Tests.testDomain import testCalculator
 from Tests.testFuntionalitati import testMaxPretPerLocatie, testOrdonareDupaPret, testModificareLocatie, \
-    testAfisareaSumelorPerLocatie, testConcantenareString
+    testAfisareaSumelorPerLocatie, testConcantenareString, testUndoRedo
 
 
 def runAllTests():
@@ -13,3 +13,4 @@ def runAllTests():
     testModificareLocatie()
     testAfisareaSumelorPerLocatie()
     testConcantenareString()
+    testUndoRedo()

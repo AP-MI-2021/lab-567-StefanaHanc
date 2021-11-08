@@ -1,7 +1,7 @@
 from Domain.calculatoare import getId, getLocatie, getDescriere
-from Logic.CRUD import adaugaCalculator
+from Logic.CRUD import adaugaCalculator, adaugaCalculatorUndoRedo
 from Logic.functionalitate import maxPretPerLocatie, ordonareDupaPret, modificaLocatia, afisareaSumelorPerLocatie, \
-    cacontereaStringLaDescriere
+    cacontereaStringLaDescriere, Undo, Redo
 
 
 def testMaxPretPerLocatie():
@@ -57,3 +57,59 @@ def testConcantenareString():
     lista = adaugaCalculator("3", "Lenovo", "Windows 10", 2400, "Sv", lista)
     rezultat=cacontereaStringLaDescriere(" Windows 10",2400,lista,undo,redo)
     assert getDescriere(rezultat[0])=="Windows 10 Windows 10"
+
+def testUndoRedo():
+    lista=[]
+    undo=[]
+    redo=[]
+    lista = adaugaCalculatorUndoRedo("1", "Lenovo", "Windows 10", 2400.23, "Cluj", lista,undo,redo)
+    lista = adaugaCalculatorUndoRedo("2", "Lenovo", "Windows 11", 4400, "Cluj", lista,undo,redo)
+    lista = adaugaCalculatorUndoRedo("3", "Lenovo", "Windows 11", 4400, "Cluj", lista, undo, redo)
+    assert lista==[{'id': '1', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'}, {'id': '2', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'}, {'id': '3', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'}]
+    lista=Undo(lista,undo,redo)
+    assert lista==[{'id': '1', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'}, {'id': '2', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'}]
+    lista=Undo(lista,undo,redo)
+    assert lista==[{'id': '1', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'}]
+    lista = Undo(lista, undo, redo)
+    assert lista ==[]
+    lista = Undo(lista, undo, redo)
+    assert lista is None
+    undo=[]
+    redo=[]
+    lista=[]
+    lista = adaugaCalculatorUndoRedo("4", "Lenovo", "Windows 10", 2400.23, "Cluj", lista, undo, redo)
+    lista = adaugaCalculatorUndoRedo("5", "Lenovo", "Windows 11", 4400, "Cluj", lista, undo, redo)
+    lista = adaugaCalculatorUndoRedo("6", "Lenovo", "Windows 11", 4400, "Cluj", lista, undo, redo)
+    lista=Redo(lista,undo,redo)
+    assert lista==[{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                   {'id': '5', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'},
+                   {'id': '6', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'}]
+    lista = Undo(lista, undo, redo)
+    lista=Undo(lista,undo,redo)
+    assert lista==[{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'}]
+    lista=Redo(lista,undo,redo)
+    assert lista==[{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                   {'id': '5', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'}]
+    lista = Redo(lista, undo, redo)
+    assert lista == [{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                     {'id': '5', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'},
+                     {'id': '6', 'nume': 'Lenovo', 'descriere': 'Windows 11', 'pret': 4400, 'locatie': 'Cluj'}]
+    lista = Undo(lista, undo, redo)
+    lista = Undo(lista, undo, redo)
+    lista=adaugaCalculatorUndoRedo("7", "MAC", "IOS", 2400.23, "Cluj", lista, undo, redo)
+    assert lista==[{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                   {'id': '7', 'nume': 'MAC', 'descriere': 'IOS', 'pret': 2400.23, 'locatie': 'Cluj'}]
+    lista=Redo(lista,undo,redo)
+    assert lista == [{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                     {'id': '7', 'nume': 'MAC', 'descriere': 'IOS', 'pret': 2400.23, 'locatie': 'Cluj'}]
+    lista = Undo(lista, undo, redo)
+    assert lista == [{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'}]
+    lista = Undo(lista, undo, redo)
+    assert lista == []
+    lista=Redo(lista,undo,redo)
+    lista=Redo(lista,undo,redo)
+    assert lista == [{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                     {'id': '7', 'nume': 'MAC', 'descriere': 'IOS', 'pret': 2400.23, 'locatie': 'Cluj'}]
+    lista=Redo(lista,undo,redo)
+    assert lista == [{'id': '4', 'nume': 'Lenovo', 'descriere': 'Windows 10', 'pret': 2400.23, 'locatie': 'Cluj'},
+                     {'id': '7', 'nume': 'MAC', 'descriere': 'IOS', 'pret': 2400.23, 'locatie': 'Cluj'}]

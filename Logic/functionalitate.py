@@ -57,7 +57,7 @@ def modificaLocatia(adresaCautata,adresanoua,lista,undoList,redoList):
         :return:noua lista cu locatia modificata
     """
     if getByLocatie(adresaCautata, lista) is None:
-        raise ValueError("Nu exista o calculatorul cu locatia data!")
+        raise ValueError("Nu exista calculatorul cu locatia data!")
     listaNoua=[]
     for calculator in lista:
         id =getId(calculator)
@@ -93,3 +93,17 @@ def cacontereaStringLaDescriere(substringdesc,pretcitit,lista,undoList,redoList)
     undoList.append(lista)
     redoList.clear()
     return listaNoua
+
+def Undo(lista,undolist,redolist):
+    if len(undolist)>0:
+        redolist.append(lista)
+        lista = undolist.pop()
+    else:
+        return None
+    return lista
+
+def Redo(lista,undolist,redolist):
+    if len(redolist) > 0:
+        undolist.append(lista)
+        lista = redolist.pop()
+    return lista
